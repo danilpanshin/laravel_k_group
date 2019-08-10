@@ -7,11 +7,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
 </head>
 <body>
-   
+
+<form action="{{ route('showFromSearch') }}"  method="get">
 <div class="container">
     <h1>Поиск</h1>   
-    <input class="typeahead form-control" type="text">
+    <input class="typeahead form-control" type="text" name="name" required>
+    <button type="submit">Показать</button>
 </div>
+</form>
    
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";

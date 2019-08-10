@@ -30,4 +30,17 @@ class SearchController extends Controller
    
         return response()->json($data);
     }
+
+    public function showFromSearch(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        $data = Item::getData($request->input('name'));
+        return view('item', ['name' => $data->name,
+                            'price' => $data->price,
+                            'description' => $data->description,
+                            'url' => $data->url,
+                            'picture' => $data->picture]);
+    }
 }
