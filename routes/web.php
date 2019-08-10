@@ -14,3 +14,4 @@
 Route::get('/', 'SearchController@index')->name('search');
 Route::get('autocomplete', 'SearchController@autocomplete')->name('autocomplete');
 Route::get('/show', 'SearchController@showFromSearch')->name('showFromSearch');
+Route::get('/items/{id}', 'SearchController@showById')->name('showById');

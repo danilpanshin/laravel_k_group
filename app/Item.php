@@ -12,4 +12,11 @@ class Item extends Model
         ->where("name","=","{$name}")
         ->first();
      }  
+
+     public static function getDataById($id)
+     {
+        return Item::select("name", "price", "description", "url", "picture")
+        ->where("id","=","{$id}")
+        ->first();
+     }  
 }

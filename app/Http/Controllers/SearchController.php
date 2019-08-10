@@ -43,4 +43,14 @@ class SearchController extends Controller
                             'url' => $data->url,
                             'picture' => $data->picture]);
     }
+
+    public function showById($id)
+    {
+        $data = Item::getDataById($id);
+        return view('item', ['name' => $data->name,
+                            'price' => $data->price,
+                            'description' => $data->description,
+                            'url' => $data->url,
+                            'picture' => $data->picture]);
+    }
 }
