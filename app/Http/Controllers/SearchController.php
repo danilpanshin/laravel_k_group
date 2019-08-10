@@ -1,10 +1,10 @@
 <?php
-  
+
 namespace App\Http\Controllers;
-  
+
 use Illuminate\Http\Request;
 use App\Item;
-  
+
 class SearchController extends Controller
 {
     /**
@@ -25,9 +25,9 @@ class SearchController extends Controller
     public function startImport()
     {
         Item::startImport();
-        return view('search');
+        return redirect()->route('search');
     }
-  
+
     /**
      *
      * @return \Illuminate\Http\Response
@@ -35,9 +35,9 @@ class SearchController extends Controller
     public function autocomplete(Request $request)
     {
         $data = Item::select("name")
-                ->where("name","LIKE","%{$request->input('query')}%")
-                ->get();
-   
+            ->where("name", "LIKE", "%{$request->input('query')}%")
+            ->get();
+
         return response()->json($data);
     }
 
@@ -47,20 +47,28 @@ class SearchController extends Controller
             'name' => 'required'
         ]);
         $data = Item::getData($request->input('name'));
-        return view('item', ['name' => $data->name,
-                            'price' => $data->price,
-                            'description' => $data->description,
-                            'url' => $data->url,
-                            'picture' => $data->picture]);
+        if ($data !== null) {
+            return view('item', [
+                'name' => $data->name,
+                'price' => $data->price,
+                'description' => $data->description,
+                'url' => $data->url,
+                'picture' => $data->picture
+            ]);
+        } else {
+            return 'Товар не найден';
+        }
     }
 
     public function showById($id)
     {
         $data = Item::getDataById($id);
-        return view('item', ['name' => $data->name,
-                            'price' => $data->price,
-                            'description' => $data->description,
-                            'url' => $data->url,
-                            'picture' => $data->picture]);
+        return view('item', [
+            'name' => $data->name,
+            'price' => $data->price,
+            'description' => $data->description,
+            'url' => $data->url,
+            'picture' => $data->picture
+        ]);
     }
 }
