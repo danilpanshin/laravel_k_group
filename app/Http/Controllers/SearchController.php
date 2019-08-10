@@ -16,9 +16,19 @@ class SearchController extends Controller
     {
         return view('search');
     }
+
+    public function startImportView()
+    {
+        return view('imports');
+    }
+
+    public function startImport()
+    {
+        Item::startImport();
+        return view('search');
+    }
   
     /**
-     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
